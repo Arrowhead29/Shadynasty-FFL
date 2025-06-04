@@ -140,7 +140,6 @@
     
         <h4 class="noUnderscore clickable" onclick={() => goToSection(sevenOne)}>7.1 League Dues</h4>
         <h4 class="noUnderscore clickable" onclick={() => goToSection(sixTwo)}>7.2 Payout</h4>
-        <h4 class="noUnderscore clickable" onclick={() => goToSection(sixThree)}>7.3 Raising Dues</h4>
     
     
     <hr />
@@ -149,7 +148,7 @@
     
     <h3 class="subSectionHeading" bind:this={oneOne}>1.1 Positional Breakdown</h3>
     
-    <p>28 Total Players</p>
+    <p>25 Total Players</p>
     
     <p class="underscore">Starters</p>
     <ul>
@@ -158,28 +157,28 @@
         <li>RB</li>
         <li>WR</li>
         <li>WR</li>
+        <li>WR</li>
         <li>TE</li>
         <li>FLEX (RB/WR/TE)</li>
-        <li>FLEX (RB/WR)</li>
-        <li>D/ST</li>
-        <li>K</li>
+        <li>FLEX (RB/WR/TE)</li>
+        <li>SUPERFLEX (QB/RB/WR/TE)</li>
     </ul>
     
-    <p>18 Bench (Expanded by 5 between the keague draft and start of regular season)</p>
+    <p>13 Bench</p>
 
-    <p>1 IR Spots (Player must be labeled as IR, Out, or Covid in the Sleeper App)</p>
+    <p>4 IR (Player must be labeled as IR in the Sleeper App)</p>
+
+    <p>4 Taxi (Player must have 2 years or less of NFL experience)</p>
     
         <h4 bind:this={oneOneOne}>1.1.1 Position Maximums</h4>
         
         <div class="subBlock">
             <table class="positionMaximums">
                 <tbody>
-                <tr><td>QB</td><td class="right">3 active, 5 total</td></tr>
-                <tr><td>RB</td><td class="right">20</td></tr>
-                <tr><td>WR</td><td class="right">20</td></tr>
-                <tr><td>TE</td><td class="right">10</td></tr>
-                <tr><td>D/ST</td><td class="right">3</td></tr>
-                <tr><td>K</td><td class="right">3</td></tr>
+                <tr><td>QB</td><td class="right">No maximum</td></tr>
+                <tr><td>RB</td><td class="right">No maximum</td></tr>
+                <tr><td>WR</td><td class="right">No maximum</td></tr>
+                <tr><td>TE</td><td class="right">No maximum</td></tr>
                 </tbody>
             </table>
         </div>
@@ -187,7 +186,7 @@
 
     <h3 class="subSectionHeading" bind:this={oneTwo}>1.2 Trading</h3>
     
-    <p>Trading of players and draft picks (up to 3 drafts away) are allowed. Trades will process immediately and will be reversed if vetoed or under investigation for collusion. Tradable assets include players, draft picks, and FAAB $.</p>
+    <p>Trading of players and draft picks (up to 3 drafts away) are allowed. Trades will undergo a 24-hour review process with a majority vote required in order to veto. Commissioner may process trades ahead of 24-hour period upon guarantee of no majority vote to veto. Tradable assets include players, three years of draft picks, and current year FAAB $.</p>
     
     <h4 bind:this={oneTwoOne}>1.2.1 Trade Collusion</h4>
     <div class="subBlock">
@@ -213,7 +212,7 @@
     
     <h4 bind:this={oneTwoThree}>1.2.3 Trade Deadline</h4>
     <div class="subBlock">
-        <p>The trade deadline will be set for the Saturday of the week 11 games of the NFL season.</p>
+        <p>There will be no trade deadline.</p>
     </div>
     
     <h4 bind:this={oneTwoFour}>1.2.4 Trade Restrictions</h4>
@@ -223,14 +222,14 @@
     
     <h4 bind:this={oneTwoFive}>1.2.5 Veto/Trade Process</h4>
     <div class="subBlock">
-        <p>A total of 7 veto votes are required to veto a trade. Vetoes are only appropriate in instances of collusion or an egregious mismatch of value (i.e. CMC for a backup kicker). Not liking a trade does not warrant a veto.</p>
+        <p>A majority vote is required to veto a trade. Vetoes are only appropriate in instances of collusion or an egregious mismatch of value.</p>
     </div>
     
     
     
     <h3 bind:this={oneThree}>1.3 Waiver Wire</h3>
     
-    <p>FAAB Waiver wire system. Each team will begin the season with $100. $0 bids are allowed. Bids will process Thursdays and Sundays at 9AM EST.</p>
+    <p>FAAB Waiver wire system. Each team will begin the season with $1000. $0 bids are allowed. During the season, bids will process Wednesdays at 2AM CDT.  After being dropped, players will remain on waivers for 48 hours before being processed.</p>
 
     <p>FAAB budgets will reset each season in January.</p>
     
@@ -238,11 +237,10 @@
     <h2 class="sectionHeading" bind:this={two}>Section 2 Drafting</h2>
     
     <h3 bind:this={twoOne}>2.1 Draft Order</h3>
-    <p>The draft order each year will be a linear draft in reverse order of the previous year’s regular season standings.</p>
+    <p>The draft order each year will be a linear draft. Managers that did not make the playoffs will be ordered in reverse Max PF order (player with the lowest Max PF from the previous season that also did not make the playoffs will receive the #1 pick). Players that made the playoffs will be ordered by their final place (player that won the championship the previous season will receive the final pick of each round).</p>
 
     <h3 bind:this={twoTwo}>2.2 Rookie Drafts</h3>
-    <p>Rokkie drafts will consist of 3 round of drafting, with 5 minutes alotted for each pick. To make room for the incoming players, benches will be expanded by (5) spots. These spots will be removed in mid-August, at which point you will need to have cut the necessary players.</p>
-    <p>Any spots not filled during the draft, can be filled immediately afterwards from the waiver wire.</p>
+    <p>Rookie drafts will consist of 5 rounds.</p>
     
     <h3 bind:this={twoThree}>2.3 Draft Day Trades</h3>
     <p>If a trade is being made during the draft, one or both parties can alert the commissioner to pause the draft to allow for extra time to negotiate the trade.</p>
@@ -250,20 +248,19 @@
     <h2 class="sectionHeading" bind:this={three}>Section 3 Scoring System</h2>
 
     <h3 bind:this={threeOne}>3.1 Scoring System</h3>
-    <p>The league scoring system breakdown is listed on the Sleeper fantasy app (for the most part, it follows typical .5PPR Scoring). The scoring system will never change without a majority league vote.</p>
+    <p>The league scoring system breakdown is listed on the Sleeper fantasy app. Any change to the scoring system requires a majority vote in favor of the change.</p>
     
     <h2 class="sectionHeading" bind:this={four}>Section 4 Postseason</h2>
     
     <h3 bind:this={fourOne}>4.1 Playoffs</h3>
-    <p>At the end of the season 6 teams will make the playoffs. The first round of playoffs will commence in week 15. Each team that wins their division and the 4 wild card teams that finish with the best records, will receive a playoff berth. The 2 teams that win their division will receive a bye week in the first round of the playoffs. Each playoff matchup will only last one week and the winner will advance. Week 18 will not be used.</p>
+    <p>The league will have a six-team playoff with the first round commencing in week 15. Playoff berths will go to the top 6 teams according to Sleeper's standings with default tiebreaker settings. The top two teams will receive a bye week in the first round of the playoffs. Each playoff matchup will only last one week.</p>
     
     <h3 bind:this={fourTwo}>4.2 Seeding Tiebreakers</h3>
     <p>If two teams finish with the same record the tiebreakers will go as followed:</p>
 
     <ol>
-        <li>Points For</li>
-        <li>Head 2 Head Record</li>
-        <li>Division Record</li>
+        <li>Total Points For</li>
+        <li>Head-to-Head Record</li>
         <li>Total Points Against</li>
         <li>Coin Flip</li>
         <li>Duel to the death</li>
@@ -272,7 +269,7 @@
     <h2 class="sectionHeading" bind:this={five}>Section 5 Tanking Policy</h2>
     
     <h3 bind:this={fiveOne}>5.1 League Tanking Policy</h3>
-    <p>No team may intentionally leave starting roster spots empty. Any evidence of intentionally leaving roster spots empty in order to improve your draft position may be subject to punishment, including but not limited to the forfeiture of draft selections.</p>
+    <p>No team may intentionally leave starting roster spots empty. Any evidence of intentionally leaving roster spots empty may be subject to punishment, including but not limited to the forfeiture of draft selections.</p>
 
     <h2 class="sectionHeading" bind:this={six}>Section 6 Replacing Managers</h2>
     
@@ -280,15 +277,15 @@
     <p>Short of continuously failing to set a valid lineup, or confirmed collusion, no manager can be removed against their will. Participation, through the league chat, trade offers, and the waiver wire, is strongly encouraged but generally grounds for removal.</p>
     
     <h3 bind:this={sixTwo}>6.2 Replacing Managers</h3>
-    <p>When a manager needs to be replaced, the commisiooners will try to find a suitable candidate with some connection to at least a portion of the existing managers. Priority will be placed on managers who are eager to take on a dynasty commitment and will be very active within the league.</p>
+    <p>When a manager needs to be replaced, the commissioner will attempt to find a suitable candidate with some connection to at least a portion of the existing managers. Priority will be placed on managers who are eager to take on a dynasty commitment and will be very active within the league.</p>
     
     <h3 bind:this={sixThree}>6.3 Replacement Incentive</h3>
-    <p>In the event that a manager chooses to quit the league or is removed by a comissioner, an incoming manager is offered a 50% reductioon on their first year buy-in.</p>
+    <p>In the event a manager leaves or is removed from the league, the commissioner may use their discretion to offer a reduction in first year league fees in order to incentivize a new manager to fill the vacated position.</p>
 
     <h2 class="sectionHeading" bind:this={seven}>Section 7 League Finances</h2>
     
     <h3 bind:this={sevenOne}>7.1 League Dues</h3>
-    <p>League dues are set at {dues}$. Dues are collected through <a href="https://www.leaguesafe.com/league/3949641">LeagueSafe</a> and collection will be sent out no later than the first of August. All managers must be fully paid up before the start of regular season. In the event that a manager fails to pay before the deadline, a 10% penalty will be addd to their payment and will go towards the payouts at the end of the year.</p>
+    <p>League dues are set at ${dues}. Dues are collected through Venmo and handled by the commissioner. A call for collection will be sent out no later than the first of August. All managers must be fully paid up before the start of regular season. In the event that a manager fails to pay before the deadline, a 10% penalty will be addd to their payment and will go towards the payouts at the end of the year.</p>
     
     <h3 bind:this={sevenTwo}>7.2 Payout</h3>
     <p>League payout is structured as follows:</p>
@@ -297,9 +294,6 @@
         <li>2nd place: {dues * 3}$</li>
         <li>3rd place: {dues}$</li>
     </ul>
-    <p>In the event that a manager was fined due to late payment, their extra fee will be added to the winner's payout. Similarly, if new managers come into the league and the payout is smaller, the difference will come out of the winner's prize.</p>
+    <p>In the event that a manager was fined due to late payment, their extra fee will be added to the winner's payout. In the event of new manager(s) joining the league with a reduced first year buy-in, the difference will come out of the winner's prize.</p>
     
-    <h3 bind:this={sevenThree}>7.3 Raising Dues</h3>
-    <p>A ⅔ majority vote is required in order to raise league dues. In the event that a manager is no longer financially comfortable with the buyin, finding a co-manager to split the cost is reccomended.</p>
-
 </div>
