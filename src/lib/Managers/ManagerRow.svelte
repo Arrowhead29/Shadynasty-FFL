@@ -231,7 +231,7 @@
 
 <div class="manager" style="{retired ? "background-image: url(/retired.png); background-color: var(--ddd)": ""}" onclick={() => goto(`/manager?manager=${key}`)}>
     <div class="avatarHolder">
-        <img class="photo" src="{team ? team.avatar : 'https://sleepercdn.com/images/v2/icons/player_default.webp'}" alt="{manager.name}" />
+        <img class="photo" src="{manager.photo}" alt="{manager.name}" />
         {#if commissioner}
             <div class="commissionerBadge">
                 <span>C</span>
