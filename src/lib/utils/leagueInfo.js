@@ -1,3 +1,5 @@
+import { getLeagueTeamManagers } from "./helper";
+
 /*   STEP 1   */
 export const leagueID = "1210790609942482945"; // your league ID
 export const leagueName = "Shadynasty FFL"; // your league name
@@ -32,7 +34,7 @@ export const managers = [
       "tookOver": null, // (optional) used if a manager took over a team, delete this line or change to null otherwise
       "location": null, // (optional)
       "bio": "No bio available",
-      "photo": team.avatar, // square ratio recommended (no larger than 500x500)
+      "photo": getLeagueTeamManagers.avatar, // square ratio recommended (no larger than 500x500)
       "favoriteTeam": null, // (optional) favorite NFL team, (follows convention: nyj, sea, mia, etc.) MUST BE LOWERCASE
       "mode": null, // (optional) 'Win Now', 'Dynasty', or 'Rebuild' (anything else and you will need to add a new png to /static/ similar to the 'Rebuild.png' and 'Win Now.png' currently in there)
       "rival": {
