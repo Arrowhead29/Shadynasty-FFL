@@ -224,7 +224,7 @@
 
 <div class="managerContainer">
     <div class="managerConstrained">
-        <img alt="team avatar" class="managerPhoto" src="{team ? team.avatar : 'https://sleepercdn.com/images/v2/icons/player_default.webp'}" />
+        <img class="managerPhoto" src="{viewManager.photo}" alt="manager"/>
         <h2>
             {viewManager.name}
             <div class="teamSub">{coOwners ? 'Co-' : ''}<i>{getTeamNameFromTeamManagers(leagueTeamManagers, rosterID, year)}</i></div>
