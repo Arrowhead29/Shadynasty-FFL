@@ -247,7 +247,7 @@
     <div class="spacer" />
     <div class="info">
         <!-- Favorite team (optional) -->
-        <div class="infoSlot infoTeam">
+        <!-- <div class="infoSlot infoTeam">
             {#if manager.favoriteTeam}
                 <div class="infoIcon">
                     <img class="infoImg" src="https://sleepercdn.com/images/team_logos/nfl/{manager.favoriteTeam}.png" alt="favorite team"/>
@@ -257,9 +257,9 @@
                     <img class="infoImg" src="/managers/question.jpg" alt="favorite team"/>
                 </div>
             {/if}
-        </div>
+        </div> -->
         <!-- Preferred contact -->
-        <div class="infoSlot">
+        <!-- <div class="infoSlot">
             {#if manager.preferredContact}
                 <div class="infoIcon">
                     <img class="infoImg" src="/{manager.preferredContact}.png" alt="{manager.preferredContact}"/>
@@ -272,6 +272,6 @@
                     <img class="infoImg" src="/managers/question.jpg" alt="favorite team"/>
                 </div>
             {/if}
-        </div>
+        </div> -->
     </div>
 </div>

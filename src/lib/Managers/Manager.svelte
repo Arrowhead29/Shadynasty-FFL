@@ -239,25 +239,14 @@
             {#if viewManager.managerID && datesActive.start}
                 <span class="seperator">|</span>
                 {#if datesActive.end}
-                    <span class="infoChild">In the league from '{datesActive.start.toString().substr(2)} to '{datesActive.end.toString().substr(2)}</span>
+                    <span class="infoChild">{datesActive.start.toString()} - {datesActive.end.toString()}</span>
                 {:else}
-                    <span class="infoChild">In the league since '{datesActive.start.toString().substr(2)}</span>
+                    <span class="infoChild">{datesActive.start.toString()} - Current</span>
                 {/if}
             {:else if viewManager.fantasyStart}
                 <!-- fantasyStart is an optional field -->
                 <span class="seperator">|</span>
-                <span class="infoChild">Playing ff since '{viewManager.fantasyStart.toString().substr(2)}</span>
-            {/if}
-            {#if viewManager.preferredContact}
-                <!-- preferredContact is an optional field -->
-                <span class="seperator">|</span>
-                <span class="infoChild">{viewManager.preferredContact}<img class="infoChild infoContact" src="/{viewManager.preferredContact}.png" alt="favorite team"/></span>
-            {/if}
-            <!-- <span class="infoChild">{viewManager.preferredContact}</span> -->
-            {#if viewManager.favoriteTeam}
-                <!-- favoriteTeam is an optional field -->
-                <span class="seperator">|</span>
-                <img class="infoChild infoTeam" src="https://sleepercdn.com/images/team_logos/nfl/{viewManager.favoriteTeam}.png" alt="favorite team"/>
+                <span class="infoChild">Playing ff since '{viewManager.fantasyStart.toString()}</span>
             {/if}
             {#if commissioner}
                 <span class="seperator">|</span>
