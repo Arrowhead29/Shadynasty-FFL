@@ -8,7 +8,7 @@
     import ManagerFantasyInfo from './ManagerFantasyInfo.svelte';
     import ManagerAwards from './ManagerAwards.svelte';
     import { onMount } from 'svelte';
-	import { getDatesActive, getRosterIDFromManagerID, getTeamNameFromTeamManagers } from '$lib/utils/helperFunctions/universalFunctions';
+	import { getDatesActive, getRosterIDFromManagerID, getTeamNameFromTeamManagers, getTeamFromTeamManagers } from '$lib/utils/helperFunctions/universalFunctions';
 
     export let manager, managers, rostersData, leagueTeamManagers, rosterPositions, transactionsData, awards, records;
 
@@ -30,6 +30,10 @@
     $: coOwners = year && rosterID ? leagueTeamManagers.teamManagersMap[year][rosterID].managers.length > 1 : roster.co_owners;
 
     $: commissioner = viewManager.managerID ? leagueTeamManagers.users[viewManager.managerID].is_owner : false;
+
+    // Get team data from Sleeper API to access avatar
+    $: teamData = getTeamFromTeamManagers(leagueTeamManagers, rosterID, year);
+    $: avatarUrl = teamData?.avatar || viewManager.photo; // Fallback to original photo if no avatar
 
     let players, playersInfo;
     let loading = true;
@@ -224,7 +228,7 @@
 
 <div class="managerContainer">
     <div class="managerConstrained">
-        <img class="managerPhoto" src="{viewManager.photo}" alt="manager"/>
+        <img class="managerPhoto" src="{avatarUrl}" alt="manager"/>
         <h2>
             {viewManager.name}
             <div class="teamSub">{coOwners ? 'Co-' : ''}<i>{getTeamNameFromTeamManagers(leagueTeamManagers, rosterID, year)}</i></div>
