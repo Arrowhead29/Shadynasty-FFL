@@ -242,7 +242,7 @@
             Rival
         </div>
         <div class="infoIcon">
-            <img class="rival" src="{viewManager.rival.image}" alt="rival"/>
+            <img class="rival" src="{rivalAvatarUrl}" alt="rival"/>
         </div>
         <div class="infoAnswer">
             {viewManager.rival.name}

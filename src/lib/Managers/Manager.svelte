@@ -275,7 +275,6 @@
         
         <div class="basicInfo">
             {#if viewManager.managerID && datesActive.start}
-                <span class="seperator">|</span>
                 {#if datesActive.end}
                     <span class="infoChild">{datesActive.start.toString()} - {datesActive.end.toString()}</span>
                 {:else}
