@@ -191,8 +191,8 @@
         <p>If any owners are suspected of accepting bribes/offering bribes to enhance their/another owner's team via trade, trading any assets other than fantasy players, draft picks, FAAB $, or otherwise found guilty of engaging in any form of collusion, all parties involved in the trade will be susceptible to punishment. The punishments will go as followed:</p>
         
         <ul>
-            <li>First Offense – Immediate reduction of FAAB budget by 75% and docking of a 5th round pick in ensuing rookie draft. If manager does not posess a 5th round pick in the ensuing rookie draft, the fine will increase by a round until the point that there is a pick to forfeit</li>
-            <li>Second Offense – Immediate freeze on all transaction types for the remainder of the season and docking of a 3rd round pick in ensuing rookie draft.  If manager does not posess a 3rd round pick in the ensuing rookie draft, the fine will increase by a round until the point that there is a pick to forfeit</li>
+            <li>First Offense – Immediate reduction of FAAB budget by 75% and docking of a 5th round pick in ensuing rookie draft. If manager does not possess a 5th round pick in the ensuing rookie draft, the fine will increase by a round until the point that there is a pick to forfeit</li>
+            <li>Second Offense – Immediate freeze on all transaction types for the remainder of the season and docking of a 3rd round pick in ensuing rookie draft.  If manager does not possess a 3rd round pick in the ensuing rookie draft, the fine will increase by a round until the point that there is a pick to forfeit</li>
             <li>Third Offense – Removal from the league</li>
         </ul>
 
