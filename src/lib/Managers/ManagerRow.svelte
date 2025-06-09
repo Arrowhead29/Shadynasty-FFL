@@ -1,6 +1,6 @@
 <script>
     import { goto } from "$app/navigation";
-	import { getDatesActive, getRosterIDFromManagerID, getTeamNameFromTeamManagers } from "$lib/utils/helperFunctions/universalFunctions";
+	import { getDatesActive, getRosterIDFromManagerID, getTeamNameFromTeamManagers, getTeamFromTeamManagers } from "$lib/utils/helperFunctions/universalFunctions";
     import {dynasty} from "$lib/utils/leagueInfo"
 
     export let manager, leagueTeamManagers, key;
@@ -19,6 +19,10 @@
     }
 
     const commissioner = manager.managerID ? leagueTeamManagers.users[manager.managerID].is_owner : false;
+    
+    // Get team data from Sleeper API to access avatar
+    const teamData = getTeamFromTeamManagers(leagueTeamManagers, rosterID, year);
+    const avatarUrl = teamData?.avatar || manager.photo; // Fallback to original photo if no avatar
 </script>
 
 <style>
@@ -231,7 +235,7 @@
 
 <div class="manager" style="{retired ? "background-image: url(/retired.png); background-color: var(--ddd)": ""}" onclick={() => goto(`/manager?manager=${key}`)}>
     <div class="avatarHolder">
-        <img class="photo" src="{manager.photo}" alt="{manager.name}" />
+        <img class="photo" src="{avatarUrl}" alt="{manager.name}" />
         {#if commissioner}
             <div class="commissionerBadge">
                 <span>C</span>

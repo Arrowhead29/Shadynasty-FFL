@@ -195,7 +195,7 @@ export const getTeamData = (users, ownerID) => {
 	if(user) {
 		return {
 			avatar: user.metadata?.avatar ? user.metadata.avatar : `https://sleepercdn.com/avatars/thumbs/${user.avatar}`,
-			name: user.metadata?.team_name ? user.metadata.team_name : `team ${user.original_display_name}`,
+			name: user.metadata?.team_name ? user.metadata.team_name : `Team ${user.original_display_name}`,
 		}
 	}
     return {
