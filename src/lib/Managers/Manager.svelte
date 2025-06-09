@@ -35,6 +35,19 @@
     $: teamData = getTeamFromTeamManagers(leagueTeamManagers, rosterID, year);
     $: avatarUrl = teamData?.avatar || viewManager.photo; // Fallback to original photo if no avatar
 
+    // Get rival team data from Sleeper API
+    $: rivalRosterID = viewManager.rival?.link !== null && viewManager.rival?.link !== undefined 
+        ? managers[viewManager.rival.link]?.roster || getRosterIDFromManagerID(leagueTeamManagers, managers[viewManager.rival.link]?.managerID)?.rosterID
+        : null;
+
+    $: rivalYear = viewManager.rival?.link !== null && viewManager.rival?.link !== undefined 
+        ? getRosterIDFromManagerID(leagueTeamManagers, managers[viewManager.rival.link]?.managerID)?.year
+        : null;
+
+    $: rivalTeamData = rivalRosterID ? getTeamFromTeamManagers(leagueTeamManagers, rivalRosterID, rivalYear) : null;
+
+    $: rivalAvatarUrl = rivalTeamData?.avatar || viewManager.rival?.image; // Fallback to hardcoded image if no API avatar
+
     let players, playersInfo;
     let loading = true;
 
@@ -235,7 +248,6 @@
         </h2>
         
         <div class="basicInfo">
-            <span class="infoChild">{viewManager.location || 'Undisclosed Location'}</span>
             {#if viewManager.managerID && datesActive.start}
                 <span class="seperator">|</span>
                 {#if datesActive.end}
@@ -292,8 +304,8 @@
     </div>
 
     {#if !loading}
-        <!-- Favorite player -->
-        <ManagerFantasyInfo {viewManager} {players} {changeManager} />
+        <!-- Favorite player - now passes rivalAvatarUrl -->
+        <ManagerFantasyInfo {viewManager} {players} {changeManager} {rivalAvatarUrl} />
     {/if}
 
     <ManagerAwards {leagueTeamManagers} tookOver={viewManager.tookOver} {awards} {records} {rosterID} managerID={viewManager.managerID} />
