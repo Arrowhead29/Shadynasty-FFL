@@ -7,12 +7,8 @@ export const enableBlog = false; // requires VITE_CONTENTFUL_ACCESS_TOKEN and VI
 
 /*   STEP 2   */
 export const homepageText = `
-  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-  <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-  <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-  <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+  <p>Welcome to the Shadynasty FFL, where the name is questionable, the trash talk is lethal, and only the shameless survive. With 10 teams locked and loaded in a deep, Superflex-friendly format, this league isn't for casuals — it's for degenerates who think sleep is optional when waivers run. With lineups packed tighter than a frat house fridge on game day (yes, we’re rocking 2 FLEX and a SUPER FLEX), you better bring depth, strategy, and a little bit of black magic if you want to survive.</p>
+  <p>Built for chaos and crowned with keepers, Shadynasty FFL is a battlefield where last season’s champ is already on borrowed time. With cutthroat trades, intense playoff chases, and FAAB fights that resemble bar brawls, every season writes a new chapter of petty vendettas and fantasy glory. Whether you're here to dominate or just avoid ending up in the loser bracket of shame, one thing's certain: this league is as shady as its name.</p>
 `;
 
 /*   STEP 3   */
