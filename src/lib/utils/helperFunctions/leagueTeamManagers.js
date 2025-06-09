@@ -63,6 +63,8 @@ const processUsers = (rawUsers) => {
 		finalUsers[user.user_id] = user;
         const manager = managers.find(m => m.managerID === user.user_id);
         if(manager) {
+            // Preserve original display_name before overriding
+            finalUsers[user.user_id].original_display_name = finalUsers[user.user_id].display_name;
             finalUsers[user.user_id].display_name = manager.name;
         }
 	}
