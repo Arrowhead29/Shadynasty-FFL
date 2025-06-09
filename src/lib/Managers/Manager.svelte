@@ -36,17 +36,36 @@
     $: avatarUrl = teamData?.avatar || viewManager.photo; // Fallback to original photo if no avatar
 
     // Get rival team data from Sleeper API
-    $: rivalRosterID = viewManager.rival?.link !== null && viewManager.rival?.link !== undefined 
-        ? managers[viewManager.rival.link]?.roster || getRosterIDFromManagerID(leagueTeamManagers, managers[viewManager.rival.link]?.managerID)?.rosterID
+    $: rivalManager = viewManager.rival?.link !== null && viewManager.rival?.link !== undefined 
+        ? managers[viewManager.rival.link]
         : null;
 
-    $: rivalYear = viewManager.rival?.link !== null && viewManager.rival?.link !== undefined 
-        ? getRosterIDFromManagerID(leagueTeamManagers, managers[viewManager.rival.link]?.managerID)?.year
+    $: rivalRosterInfo = rivalManager?.managerID 
+        ? getRosterIDFromManagerID(leagueTeamManagers, rivalManager.managerID)
         : null;
+
+    $: rivalRosterID = rivalRosterInfo?.rosterID || rivalManager?.roster;
+    $: rivalYear = rivalRosterInfo?.year;
 
     $: rivalTeamData = rivalRosterID ? getTeamFromTeamManagers(leagueTeamManagers, rivalRosterID, rivalYear) : null;
 
     $: rivalAvatarUrl = rivalTeamData?.avatar || viewManager.rival?.image; // Fallback to hardcoded image if no API avatar
+
+    // Debug logging (remove after testing)
+    $: {
+        if (viewManager.rival) {
+            console.log('Rival Debug:', {
+                rivalLink: viewManager.rival.link,
+                rivalManager,
+                rivalRosterInfo,
+                rivalRosterID,
+                rivalYear,
+                rivalTeamData,
+                rivalAvatarUrl,
+                hardcodedImage: viewManager.rival.image
+            });
+        }
+    }
 
     let players, playersInfo;
     let loading = true;
