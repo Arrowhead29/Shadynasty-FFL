@@ -40,6 +40,7 @@
         ? managers[viewManager.rival.link]
         : null;
 
+    // Get rival's roster info using their manager ID
     $: rivalRosterInfo = rivalManager?.managerID 
         ? getRosterIDFromManagerID(leagueTeamManagers, rivalManager.managerID)
         : null;
@@ -47,21 +48,27 @@
     $: rivalRosterID = rivalRosterInfo?.rosterID || rivalManager?.roster;
     $: rivalYear = rivalRosterInfo?.year;
 
-    $: rivalTeamData = rivalRosterID ? getTeamFromTeamManagers(leagueTeamManagers, rivalRosterID, rivalYear) : null;
+    // Get rival's team data - need to look up their specific team, not current manager's team
+    $: rivalTeamData = rivalRosterID && rivalYear
+        ? getTeamFromTeamManagers(leagueTeamManagers, rivalRosterID, rivalYear)
+        : (rivalRosterID ? getTeamFromTeamManagers(leagueTeamManagers, rivalRosterID, null) : null);
 
-    $: rivalAvatarUrl = rivalTeamData?.avatar || viewManager.rival?.image; // Fallback to hardcoded image if no API avatar
+    $: rivalAvatarUrl = rivalTeamData?.avatar || viewManager.rival?.image;
 
-    // Debug logging (remove after testing)
+    // Debug logging
     $: {
         if (viewManager.rival) {
             console.log('Rival Debug:', {
+                currentManagerRosterID: rosterID,
                 rivalLink: viewManager.rival.link,
                 rivalManager,
+                rivalManagerID: rivalManager?.managerID,
                 rivalRosterInfo,
                 rivalRosterID,
                 rivalYear,
                 rivalTeamData,
-                rivalAvatarUrl,
+                rivalAvatar: rivalTeamData?.avatar,
+                finalRivalAvatarUrl: rivalAvatarUrl,
                 hardcodedImage: viewManager.rival.image
             });
         }
