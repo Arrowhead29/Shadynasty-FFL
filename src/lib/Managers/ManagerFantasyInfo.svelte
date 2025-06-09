@@ -194,20 +194,6 @@
             </div>
         </div>
     {/if}
-    {#if viewManager.tradingScale}
-        <!-- Trading Scale -->
-        <div class="infoSlot">
-            <div class="infoLabel">
-                Desire to Trade
-            </div>
-            <div class="infoIcon">
-                <span class="tradingScale">{viewManager.tradingScale}</span>
-            </div>
-            <div class="infoAnswer">
-                {viewManager.tradingScale} out of 10
-            </div>
-        </div>
-    {/if}
     <!-- Favorite player (optioonal) -->
     {#if viewManager.favoritePlayer}
         <div class="infoSlot">
@@ -236,16 +222,4 @@
             </div>
         </div>
     {/if}
-    <!-- Rival -->
-    <div class="infoSlot infoRival" onclick={() => changeManager(viewManager.rival.link)}>
-        <div class="infoLabel">
-            Rival
-        </div>
-        <div class="infoIcon">
-            <img class="rival" src="{rivalAvatarUrl}" alt="rival"/>
-        </div>
-        <div class="infoAnswer">
-            {viewManager.rival.name}
-        </div>
-    </div>
 </div>
