@@ -15,7 +15,7 @@
     let gameTypes = {
         regular: true,
         playoff: true,
-        consolation: true
+        consolation: false
     };
 
     // refresh stale data
@@ -232,7 +232,7 @@
                 id="playoff" 
                 bind:checked={gameTypes.playoff}
             />
-            <label for="playoff">Playoffs</label>
+            <label for="playoff">Postseason</label>
         </div>
         <div class="filterOption">
             <input 

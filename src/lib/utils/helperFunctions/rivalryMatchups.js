@@ -21,7 +21,7 @@ export const getRivalryMatchups = async (userOneID, userTwoID, gameTypes = { reg
 	if(nflState.season_type == 'regular') {
 		week = nflState.display_week;
 	} else if(nflState.season_type == 'post') {
-		week = 18;
+		week = 17; // Changed from 18 to 17 to exclude week 18
 	}
 
     const rivalry = {
@@ -44,14 +44,14 @@ export const getRivalryMatchups = async (userOneID, userTwoID, gameTypes = { reg
         const rosterIDTwo = getRosterIDFromManagerIDAndYear(teamManagers, userTwoID, year);
         if(!rosterIDOne || !rosterIDTwo || rosterIDOne == rosterIDTwo) {
             curLeagueID = leagueData.previous_league_id;
-            week = 18;
+            week = 17; // Changed from 18 to 17
             continue;
         }
 
         // Determine which weeks to fetch based on game types
         const weeksToFetch = [];
         const playoffStart = leagueData.settings.playoff_week_start;
-        const totalWeeks = 18; // Assuming NFL goes to week 18
+        const maxWeek = 17; // Changed from 18 to 17 to exclude week 18 and later
         
         if (gameTypes.regular) {
             // Regular season weeks
@@ -62,7 +62,7 @@ export const getRivalryMatchups = async (userOneID, userTwoID, gameTypes = { reg
         
         if (gameTypes.playoff || gameTypes.consolation) {
             // Playoff and consolation weeks (both are in playoff weeks)
-            for(let i = playoffStart; i <= totalWeeks; i++) {
+            for(let i = playoffStart; i <= maxWeek; i++) {
                 weeksToFetch.push(i);
             }
         }
@@ -88,6 +88,10 @@ export const getRivalryMatchups = async (userOneID, userTwoID, gameTypes = { reg
         // Process all the matchups
         for(let i = 0; i < matchupsData.length; i++) {
             const weekNum = weeksToFetch[i];
+            // Skip processing if week is 18 or later (additional safety check)
+            if (weekNum >= 18) {
+                continue;
+            }
             const processed = processRivalryMatchups(matchupsData[i], weekNum, rosterIDOne, rosterIDTwo, leagueData.settings, gameTypes);
             if(processed) {
                 const {matchup, week, gameType} = processed;
@@ -113,7 +117,7 @@ export const getRivalryMatchups = async (userOneID, userTwoID, gameTypes = { reg
             }
         }
         curLeagueID = leagueData.previous_league_id;
-        week = 18;
+        week = 17; // Changed from 18 to 17
     }
 
     rivalry.matchups.sort((a, b) => {
@@ -130,6 +134,11 @@ const processRivalryMatchups = (inputMatchups, week, rosterIDOne, rosterIDTwo, l
 		return false;
 	}
 	
+    // Additional check to exclude week 18 or later
+    if (week >= 18) {
+        return false;
+    }
+    
     // Determine game type
     const playoffStart = leagueSettings.playoff_week_start;
     let gameType;
