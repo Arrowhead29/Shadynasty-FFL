@@ -111,7 +111,7 @@
     // Helper function to format game type display
     const formatGameType = (type) => {
         if (type === 'regular') {
-            return 'REGULAR SEASON';
+            return 'Regular Season';
         }
         return type.charAt(0).toUpperCase() + type.slice(1);
     }
@@ -184,11 +184,11 @@
         margin-left: 0.5em;
     }
     .regular {
-        background-color: #4CAF50;
+        background-color: var(--compBarOne);
         color: white;
     }
     .postseason {
-        background-color: #FF9800;
+        background-color: var(--compBarTwo);
         color: white;
     }
     @media (max-width: 650px) {
