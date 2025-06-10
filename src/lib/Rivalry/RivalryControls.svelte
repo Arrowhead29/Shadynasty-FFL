@@ -6,17 +6,17 @@
     const nav = (dir) => {
         if(dir === "left") {
             // Left arrow goes to previous (older) matchup
-            if(selected > 0) {
+            if(selected < length - 1) {
                 selected++;
             } else {
-                selected = length - 1;
+                selected = 0;
             }
         } else {
             // Right arrow goes to following (newer) matchup
-            if(selected < length - 1) {
+            if(selected > 0) {
                 selected--;
             } else {
-                selected = 0;
+                selected = length - 1;
             }
         }
     }
