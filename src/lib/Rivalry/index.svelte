@@ -260,7 +260,7 @@
                     </span>
                 {/if}
             </h3>
-            <RivalryControls bind:selected={selected} {displayWeek} | {year} length={rivalry.matchups.length} />
+            <RivalryControls bind:selected={selected} {year} {displayWeek} length={rivalry.matchups.length} />
             <Matchup key={`${playerOne}-${playerTwo}`} ix={selected} active={selected} {year} {matchup} players={playersInfo.players} {displayWeek} expandOverride={true} {leagueTeamManagers} />
         </div>
     {/if}

@@ -5,12 +5,14 @@
 
     const nav = (dir) => {
         if(dir === "left") {
+            // Left arrow goes to previous (newer) matchup
             if(selected > 0) {
                 selected--;
             } else {
                 selected = length - 1;
             }
         } else {
+            // Right arrow goes to following (older) matchup
             if(selected < length - 1) {
                 selected++;
             } else {
