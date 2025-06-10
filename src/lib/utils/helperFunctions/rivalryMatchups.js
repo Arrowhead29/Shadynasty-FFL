@@ -5,7 +5,7 @@ import { waitForAll } from './multiPromise';
 import { getRosterIDFromManagerIDAndYear } from '$lib/utils/helperFunctions/universalFunctions';
 import { getLeagueTeamManagers } from "./leagueTeamManagers";
 
-export const getRivalryMatchups = async (userOneID, userTwoID, gameTypes = { regular: true, playoff: true, consolation: true }) => {
+export const getRivalryMatchups = async (userOneID, userTwoID, gameTypes = { regular: true, postseason: true }) => {
     if(!userOneID || !userTwoID) {
         return;
     }
@@ -60,8 +60,8 @@ export const getRivalryMatchups = async (userOneID, userTwoID, gameTypes = { reg
             }
         }
         
-        if (gameTypes.playoff || gameTypes.consolation) {
-            // Playoff and consolation weeks (both are in playoff weeks)
+        if (gameTypes.postseason) {
+            // Postseason weeks (includes both playoff and consolation games)
             for(let i = playoffStart; i <= maxWeek; i++) {
                 weeksToFetch.push(i);
             }
@@ -145,10 +145,8 @@ const processRivalryMatchups = (inputMatchups, week, rosterIDOne, rosterIDTwo, l
     if (week < playoffStart) {
         gameType = 'regular';
     } else {
-        // For playoff weeks, we need to determine if it's playoff or consolation
-        // This is a simplified approach - you might need more sophisticated logic
-        // based on your league's bracket structure
-        gameType = 'playoff'; // Default to playoff, could be enhanced to detect consolation
+        // All weeks after playoff start are considered postseason
+        gameType = 'postseason';
     }
     
     // Check if this game type should be included

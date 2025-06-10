@@ -14,8 +14,7 @@
     // Game type filters
     let gameTypes = {
         regular: true,
-        playoff: true,
-        consolation: false
+        postseason: true
     };
 
     // refresh stale data
@@ -180,12 +179,8 @@
         background-color: #4CAF50;
         color: white;
     }
-    .playoff {
+    .postseason {
         background-color: #FF9800;
-        color: white;
-    }
-    .consolation {
-        background-color: #9E9E9E;
         color: white;
     }
     @media (max-width: 650px) {
@@ -229,18 +224,10 @@
         <div class="filterOption">
             <input 
                 type="checkbox" 
-                id="playoff" 
-                bind:checked={gameTypes.playoff}
+                id="postseason" 
+                bind:checked={gameTypes.postseason}
             />
-            <label for="playoff">Postseason</label>
-        </div>
-        <div class="filterOption">
-            <input 
-                type="checkbox" 
-                id="consolation" 
-                bind:checked={gameTypes.consolation}
-            />
-            <label for="consolation">Consolation</label>
+            <label for="postseason">Postseason</label>
         </div>
     </div>
 {/if}
