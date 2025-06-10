@@ -40,7 +40,7 @@
     {#if length > 0}
         <IconButton class="material-icons" onclick={() => nav("left")}>chevron_left</IconButton>
     {/if}
-    <h4>{year} Week {displayWeek}</h4>
+    <h4>Week {displayWeek} | {year}</h4>
     {#if length > 0}
         <IconButton class="material-icons" onclick={() => nav("right")}>chevron_right</IconButton>
     {/if}

@@ -107,6 +107,14 @@
 
     $: playerOneRecords = recordsInfo?.regularSeasonData?.leagueManagerRecords ? recordsInfo.regularSeasonData.leagueManagerRecords[playerOne] : null;
     $: playerTwoRecords = recordsInfo?.regularSeasonData?.leagueManagerRecords ? recordsInfo.regularSeasonData.leagueManagerRecords[playerTwo] : null;
+
+    // Helper function to format game type display
+    const formatGameType = (type) => {
+        if (type === 'regular') {
+            return 'REGULAR SEASON';
+        }
+        return type.charAt(0).toUpperCase() + type.slice(1);
+    }
 </script>
 
 <style>
@@ -253,10 +261,9 @@
             <!-- points -->
             <ComparissonBar sideOne={parseFloat(round(rivalry.points.one))} sideTwo={parseFloat(round(rivalry.points.two))} label="Points" unit="pts" />
             <h3>
-                Matchups
                 {#if gameType}
                     <span class="gameTypeIndicator {gameType}">
-                        {gameType.charAt(0).toUpperCase() + gameType.slice(1)}
+                        {formatGameType(gameType)}
                     </span>
                 {/if}
             </h3>
