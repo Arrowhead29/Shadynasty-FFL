@@ -254,8 +254,13 @@
             <ComparissonBar sideOne={parseFloat(round(rivalry.points.one))} sideTwo={parseFloat(round(rivalry.points.two))} label="Points" unit="pts" />
             <h3>
                 Matchups
+                {#if gameType}
+                    <span class="gameTypeIndicator {gameType}">
+                        {gameType.charAt(0).toUpperCase() + gameType.slice(1)}
+                    </span>
+                {/if}
             </h3>
-            <RivalryControls bind:selected={selected} {displayWeek} | {year} {gameType.charAt(0).toUpperCase() + gameType.slice(1)} length={rivalry.matchups.length} />
+            <RivalryControls bind:selected={selected} {displayWeek} | {year} length={rivalry.matchups.length} />
             <Matchup key={`${playerOne}-${playerTwo}`} ix={selected} active={selected} {year} {matchup} players={playersInfo.players} {displayWeek} expandOverride={true} {leagueTeamManagers} />
         </div>
     {/if}
