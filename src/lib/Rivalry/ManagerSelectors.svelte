@@ -4,10 +4,22 @@
 
     export let playerOne, playerTwo, leagueTeamManagers;
 
-    const users = Object.keys(leagueTeamManagers.users);
+    // Sort users alphabetically by display_name, with retired managers at the end
+    const sortedUsers = Object.keys(leagueTeamManagers.users).sort((a, b) => {
+        const userA = leagueTeamManagers.users[a];
+        const userB = leagueTeamManagers.users[b];
+        
+        // If both have same retirement status, sort alphabetically
+        if (userA.is_retired === userB.is_retired) {
+            return userA.display_name.localeCompare(userB.display_name);
+        }
+        
+        // Put retired managers at the end
+        return userA.is_retired ? 1 : -1;
+    });
 
-    $: usersOne = users.filter(u => u !== playerTwo);
-    $: usersTwo = users.filter(u => u !== playerOne);
+    $: usersOne = sortedUsers.filter(u => u !== playerTwo);
+    $: usersTwo = sortedUsers.filter(u => u !== playerOne);
 
     const analyzeRivalry = (p1, p2) => {
         if(!p1 || !p2) {
