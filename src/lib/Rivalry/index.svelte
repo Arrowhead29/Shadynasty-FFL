@@ -11,6 +11,13 @@
 
 	export let leagueTeamManagers, playersInfo, transactionsInfo, recordsInfo, playerOne, playerTwo;
 
+    // Game type filters
+    let gameTypes = {
+        regular: true,
+        playoff: true,
+        consolation: true
+    };
+
     // refresh stale data
     onMount(async () => {
         if(transactionsInfo.stale) {
@@ -27,22 +34,23 @@
     let rivalry = null;
     let loading = true;
 
-    const analyzeRivalry = async (p1, p2) => {
+    const analyzeRivalry = async (p1, p2, types) => {
         loading = true;
         matchup = null;
         if(p1 && p2) {
-            rivalry = await getRivalryMatchups(p1, p2);
+            rivalry = await getRivalryMatchups(p1, p2, types);
             loading = false;
         }
     }
 
-    $: analyzeRivalry(playerOne, playerTwo);
+    $: analyzeRivalry(playerOne, playerTwo, gameTypes);
 
     let selected = 0;
 
     $: matchup = rivalry?.matchups[selected]?.matchup;
     $: displayWeek = rivalry?.matchups[selected]?.week;
     $: year = rivalry?.matchups[selected]?.year;
+    $: gameType = rivalry?.matchups[selected]?.gameType;
     
     const setTradeHistory = (p1, p2) => {
         if(!p1 || !p2) {
@@ -141,9 +149,51 @@
         max-width: 800px;
         margin: 0 auto 2em;
     }
+    .gameTypeFilters {
+        display: flex;
+        justify-content: center;
+        gap: 2em;
+        margin: 1em 0 2em;
+        flex-wrap: wrap;
+    }
+    .filterOption {
+        display: flex;
+        align-items: center;
+        gap: 0.5em;
+    }
+    .filterOption input[type="checkbox"] {
+        transform: scale(1.2);
+    }
+    .filterOption label {
+        font-size: 1.1em;
+        cursor: pointer;
+    }
+    .gameTypeIndicator {
+        display: inline-block;
+        padding: 0.2em 0.5em;
+        border-radius: 4px;
+        font-size: 0.8em;
+        font-weight: bold;
+        margin-left: 0.5em;
+    }
+    .regular {
+        background-color: #4CAF50;
+        color: white;
+    }
+    .playoff {
+        background-color: #FF9800;
+        color: white;
+    }
+    .consolation {
+        background-color: #9E9E9E;
+        color: white;
+    }
     @media (max-width: 650px) {
         h3 {
             font-size: 1.6em;
+        }
+        .gameTypeFilters {
+            gap: 1em;
         }
     }
     @media (max-width: 400px) {
@@ -153,6 +203,10 @@
         h3 {
             font-size: 1.3em;
         }
+        .gameTypeFilters {
+            flex-direction: column;
+            align-items: center;
+        }
     }
 </style>
 
@@ -161,6 +215,35 @@
 <div class="rivalrySelection">
     <ManagerSelectors bind:playerOne={playerOne} bind:playerTwo={playerTwo} {leagueTeamManagers} />
 </div>
+
+{#if playerOne && playerTwo}
+    <div class="gameTypeFilters">
+        <div class="filterOption">
+            <input 
+                type="checkbox" 
+                id="regular" 
+                bind:checked={gameTypes.regular}
+            />
+            <label for="regular">Regular Season</label>
+        </div>
+        <div class="filterOption">
+            <input 
+                type="checkbox" 
+                id="playoff" 
+                bind:checked={gameTypes.playoff}
+            />
+            <label for="playoff">Playoffs</label>
+        </div>
+        <div class="filterOption">
+            <input 
+                type="checkbox" 
+                id="consolation" 
+                bind:checked={gameTypes.consolation}
+            />
+            <label for="consolation">Consolation</label>
+        </div>
+    </div>
+{/if}
 
 {#if loading }
     {#if playerOne && playerTwo }
@@ -182,7 +265,14 @@
             <ComparissonBar sideOne={rivalry.wins.one} sideTwo={rivalry.wins.two} label="Wins" unit="wins" />
             <!-- points -->
             <ComparissonBar sideOne={parseFloat(round(rivalry.points.one))} sideTwo={parseFloat(round(rivalry.points.two))} label="Points" unit="pts" />
-            <h3>Matchups</h3>
+            <h3>
+                Matchups
+                {#if gameType}
+                    <span class="gameTypeIndicator {gameType}">
+                        {gameType.charAt(0).toUpperCase() + gameType.slice(1)}
+                    </span>
+                {/if}
+            </h3>
             <RivalryControls bind:selected={selected} {year} {displayWeek} length={rivalry.matchups.length} />
             <Matchup key={`${playerOne}-${playerTwo}`} ix={selected} active={selected} {year} {matchup} players={playersInfo.players} {displayWeek} expandOverride={true} {leagueTeamManagers} />
         </div>

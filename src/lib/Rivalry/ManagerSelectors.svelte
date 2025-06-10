@@ -140,7 +140,7 @@
     <div class="manager">
         <div class="container">
             <select class="selectInput left" id="managerOne" name="managerOne" bind:value={playerOne}>
-                <option value={null}>Select a manager</option>
+                <option value={null}>Select Manager</option>
                 {#each usersOne as user}
                     <option value={user}>{leagueTeamManagers.users[user].display_name}</option>
                 {/each}
@@ -156,7 +156,7 @@
     <div class="manager">
         <div class="container">
             <select class="selectInput right" id="managerOne" name="managerOne" bind:value={playerTwo}>
-                <option value={null}>Select a manager</option>
+                <option value={null}>Select Manager</option>
                 {#each usersTwo as user}
                     <option value={user}>{leagueTeamManagers.users[user].display_name}</option>
                 {/each}

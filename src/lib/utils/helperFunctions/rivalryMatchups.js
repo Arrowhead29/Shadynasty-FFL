@@ -5,7 +5,7 @@ import { waitForAll } from './multiPromise';
 import { getRosterIDFromManagerIDAndYear } from '$lib/utils/helperFunctions/universalFunctions';
 import { getLeagueTeamManagers } from "./leagueTeamManagers";
 
-export const getRivalryMatchups = async (userOneID, userTwoID) => {
+export const getRivalryMatchups = async (userOneID, userTwoID, gameTypes = { regular: true, playoff: true, consolation: true }) => {
     if(!userOneID || !userTwoID) {
         return;
     }
@@ -48,14 +48,33 @@ export const getRivalryMatchups = async (userOneID, userTwoID) => {
             continue;
         }
 
-        // pull in all matchup data for the season
+        // Determine which weeks to fetch based on game types
+        const weeksToFetch = [];
+        const playoffStart = leagueData.settings.playoff_week_start;
+        const totalWeeks = 18; // Assuming NFL goes to week 18
+        
+        if (gameTypes.regular) {
+            // Regular season weeks
+            for(let i = 1; i < playoffStart; i++) {
+                weeksToFetch.push(i);
+            }
+        }
+        
+        if (gameTypes.playoff || gameTypes.consolation) {
+            // Playoff and consolation weeks (both are in playoff weeks)
+            for(let i = playoffStart; i <= totalWeeks; i++) {
+                weeksToFetch.push(i);
+            }
+        }
+
+        // Pull in matchup data for selected weeks
         const matchupsPromises = [];
-        for(let i = 1; i < leagueData.settings.playoff_week_start; i++) {
-            matchupsPromises.push(fetch(`https://api.sleeper.app/v1/league/${curLeagueID}/matchups/${i}`, {compress: true}))
+        for(const weekNum of weeksToFetch) {
+            matchupsPromises.push(fetch(`https://api.sleeper.app/v1/league/${curLeagueID}/matchups/${weekNum}`, {compress: true}))
         }
         const matchupsRes = await waitForAll(...matchupsPromises);
 
-        // convert the json matchup responses
+        // Convert the json matchup responses
         const matchupsJsonPromises = [];
         for(const matchupRes of matchupsRes) {
             const data = matchupRes.json();
@@ -64,13 +83,14 @@ export const getRivalryMatchups = async (userOneID, userTwoID) => {
                 throw new Error(data);
             }
         }
-        const matchupsData = await waitForAll(...matchupsJsonPromises).catch((err) => { console.error(err); }).catch((err) => { console.error(err); });
+        const matchupsData = await waitForAll(...matchupsJsonPromises).catch((err) => { console.error(err); });
 
-        // process all the matchups
-        for(let i = 1; i < matchupsData.length + 1; i++) {
-            const processed = processRivalryMatchups(matchupsData[i - 1], i, rosterIDOne, rosterIDTwo);
+        // Process all the matchups
+        for(let i = 0; i < matchupsData.length; i++) {
+            const weekNum = weeksToFetch[i];
+            const processed = processRivalryMatchups(matchupsData[i], weekNum, rosterIDOne, rosterIDTwo, leagueData.settings, gameTypes);
             if(processed) {
-                const {matchup, week} = processed;
+                const {matchup, week, gameType} = processed;
                 const sideA = matchup[0];
                 const sideB = matchup[1];
                 let sideAPoints = sideA.points.reduce((t, nV) => t + nV, 0);
@@ -88,6 +108,7 @@ export const getRivalryMatchups = async (userOneID, userTwoID) => {
                     week,
                     year,
                     matchup,
+                    gameType
                 })
             }
         }
@@ -104,10 +125,28 @@ export const getRivalryMatchups = async (userOneID, userTwoID) => {
 	return rivalry;
 }
 
-const processRivalryMatchups = (inputMatchups, week, rosterIDOne, rosterIDTwo) => {
+const processRivalryMatchups = (inputMatchups, week, rosterIDOne, rosterIDTwo, leagueSettings, gameTypes) => {
 	if(!inputMatchups || inputMatchups.length == 0) {
 		return false;
 	}
+	
+    // Determine game type
+    const playoffStart = leagueSettings.playoff_week_start;
+    let gameType;
+    if (week < playoffStart) {
+        gameType = 'regular';
+    } else {
+        // For playoff weeks, we need to determine if it's playoff or consolation
+        // This is a simplified approach - you might need more sophisticated logic
+        // based on your league's bracket structure
+        gameType = 'playoff'; // Default to playoff, could be enhanced to detect consolation
+    }
+    
+    // Check if this game type should be included
+    if (!gameTypes[gameType]) {
+        return false;
+    }
+    
 	const matchups = {};
 	for(const match of inputMatchups) {
         if(match.roster_id == rosterIDOne || match.roster_id == rosterIDTwo) {
@@ -133,5 +172,5 @@ const processRivalryMatchups = (inputMatchups, week, rosterIDOne, rosterIDTwo) =
         const two = matchup.shift();
         matchup.push(two);
     }
-	return {matchup, week};
+	return {matchup, week, gameType};
 }
