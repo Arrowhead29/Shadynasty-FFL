@@ -19,12 +19,12 @@ export const tabs = [
         dest: '/transactions',
         key: 'transactions',
     },
-    {
-        icon: 'article',
-        label: 'Blog',
-        dest: '/blog',
-        key: 'blog',
-    },
+    // {
+    //     icon: 'article',
+    //     label: 'Blog',
+    //     dest: '/blog',
+    //     key: 'blog',
+    // },
     {
         icon: 'view_comfy',
         label: 'League Info',
