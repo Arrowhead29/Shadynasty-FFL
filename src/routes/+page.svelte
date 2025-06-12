@@ -2,7 +2,7 @@
 	import LinearProgress from '@smui/linear-progress';
 	import { getNflState, leagueName, getAwards, getLeagueTeamManagers, homepageText, managers, gotoManager, enableBlog, waitForAll } from '$lib/utils/helper';
 	import { Transactions, PowerRankings, HomePost} from '$lib/components';
-	import { getAvatarFromTeamManagers, getTeamFromTeamManagers } from '$lib/utils/helperFunctions/universalFunctions';
+	import { getAvatarFromTeamManagers, getTeamFromTeamManagers, renderManagerNames } from '$lib/utils/helperFunctions/universalFunctions';
 
     const nflState = getNflState();
     const podiumsData = getAwards();
@@ -193,15 +193,7 @@
                         <img src="/laurel.png" class="laurel" alt="laurel" />
                     </div>
                     <span class="label" onclick={() => gotoManager({year: podiums[0].year, leagueTeamManagers, rosterID: parseInt(podiums[0].champion)})} >{getTeamFromTeamManagers(leagueTeamManagers, podiums[0].champion, podiums[0].year).name}</span>
-                    <span class="manager-name" onclick={() => gotoManager({year: podiums[0].year, leagueTeamManagers, rosterID: parseInt(podiums[0].champion)})} >
-                        {leagueTeamManagers.teamManagersMap[podiums[0].year] && leagueTeamManagers.teamManagersMap[podiums[0].year][podiums[0].champion] ? 
-                            (leagueTeamManagers.teamManagersMap[podiums[0].year][podiums[0].champion].manager?.name || 
-                             leagueTeamManagers.teamManagersMap[podiums[0].year][podiums[0].champion].manager?.display_name ||
-                             leagueTeamManagers.teamManagersMap[podiums[0].year][podiums[0].champion].name ||
-                             leagueTeamManagers.teamManagersMap[podiums[0].year][podiums[0].champion].display_name ||
-                             'Manager Name Not Available') : 
-                            'Manager Name Not Available'}
-                    </span>
+                    <span class="manager-name" onclick={() => gotoManager({year: podiums[0].year, leagueTeamManagers, rosterID: parseInt(podiums[0].champion)})} >{renderManagerNames(leagueTeamManagers, podiums[0].champion, podiums[0].year)}</span>
                 {:else}
                     <p class="center">No former champs.</p>
                 {/if}
