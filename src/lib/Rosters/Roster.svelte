@@ -3,8 +3,7 @@
   	import DataTable, { Head, Body, Row, Cell } from '@smui/data-table';
 	import { Icon } from '@smui/icon-button';
 	import RosterRow from "./RosterRow.svelte"
-	
-	import { renderManagerNames } from '$lib/utils/helperFunctions/universalFunctions.js';
+	import { renderManagerNames } from '$lib/utils/helperFunctions/universalFunctions';
 	
 	export let roster, leagueTeamManagers, startersAndReserve, players, rosterPositions, division, expanded, showManagerNames;
 
@@ -105,6 +104,17 @@
 	}
 
 	$: record = buildRecord(roster);
+
+	// Add debugging for manager names
+	$: managerNames = renderManagerNames(leagueTeamManagers, roster.roster_id, leagueTeamManagers.currentSeason);
+	$: console.log('Manager Names Debug:', {
+		showManagerNames,
+		managerNames,
+		rosterID: roster.roster_id,
+		currentSeason: leagueTeamManagers.currentSeason,
+		teamManagersMap: leagueTeamManagers.teamManagersMap,
+		users: leagueTeamManagers.users
+	});
 
 	let selected = "0px";
 	let status = "minimized";
@@ -285,7 +295,7 @@
 						{team?.name ? team.name : 'No Manager'}
 						{#if showManagerNames}
 							<div class="managerName">
-								{renderManagerNames(leagueTeamManagers, roster.roster_id, leagueTeamManagers.currentSeason)}
+								{managerNames || 'No managers found'}
 							</div>
 						{/if}
 					</h3>
