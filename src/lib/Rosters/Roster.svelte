@@ -4,16 +4,11 @@
 	import { Icon } from '@smui/icon-button';
 	import RosterRow from "./RosterRow.svelte"
 	
-	export let roster, leagueTeamManagers, startersAndReserve, players, rosterPositions, division, expanded, renderManagerNames;
+	import { renderManagerNames } from '$lib/utils/helperFunctions/universalFunctions';
+	
+	export let roster, leagueTeamManagers, startersAndReserve, players, rosterPositions, division, expanded, showManagerNames;
 
 	$: team = leagueTeamManagers.teamManagersMap[leagueTeamManagers.currentSeason][roster.roster_id].team;
-	$: manager = leagueTeamManagers.teamManagersMap[leagueTeamManagers.currentSeason][roster.roster_id];
-	
-	// Debug logging - remove after fixing
-	$: console.log('Debug - renderManagerNames:', renderManagerNames);
-	$: console.log('Debug - manager:', manager);
-	$: console.log('Debug - manager.name:', manager?.name);
-	$: console.log('Debug - leagueTeamManagers:', leagueTeamManagers);
 
 	let i = 0;
 
@@ -288,10 +283,9 @@
 					<h3 onclick={() => gotoManager({leagueTeamManagers, rosterID: roster.roster_id})}>
 						<img alt="team avatar" class="teamAvatar" src="{team ? team.avatar : 'https://sleepercdn.com/images/v2/icons/player_default.webp'}" />
 						{team?.name ? team.name : 'No Manager'}
-						{#if renderManagerNames}
+						{#if showManagerNames}
 							<div class="managerName">
-								<!-- Try multiple possible manager name properties -->
-								{manager?.name || manager?.display_name || manager?.username || 'No Manager Name'}
+								{renderManagerNames(leagueTeamManagers, roster.roster_id, leagueTeamManagers.currentSeason)}
 							</div>
 						{/if}
 					</h3>
