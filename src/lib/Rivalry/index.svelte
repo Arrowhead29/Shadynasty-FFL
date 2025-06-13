@@ -255,7 +255,7 @@
 {:else}
     {#if rivalry?.matchups.length > 0 }
         <div class="scoreBoard">
-            <h3>Head to Head</h3>
+            <h3>Head-to-Head</h3>
             <!-- wins -->
             <ComparissonBar sideOne={rivalry.wins.one} sideTwo={rivalry.wins.two} label="Wins" unit="wins" />
             <!-- points -->
