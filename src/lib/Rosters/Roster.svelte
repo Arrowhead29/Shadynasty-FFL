@@ -4,9 +4,10 @@
 	import { Icon } from '@smui/icon-button';
 	import RosterRow from "./RosterRow.svelte"
 	
-	export let roster, leagueTeamManagers, startersAndReserve, players, rosterPositions, division, expanded;
+	export let roster, leagueTeamManagers, startersAndReserve, players, rosterPositions, division, expanded, renderManagerNames;
 
 	$: team = leagueTeamManagers.teamManagersMap[leagueTeamManagers.currentSeason][roster.roster_id].team;
+	$: manager = leagueTeamManagers.teamManagersMap[leagueTeamManagers.currentSeason][roster.roster_id];
 
 	let i = 0;
 
@@ -204,6 +205,13 @@
 		text-align: center;
 	}
 
+	.managerName {
+		font-size: 0.9em;
+		color: #888;
+		font-weight: 400;
+		margin-top: 3px;
+	}
+
 	@media (max-width: 500px) {
 		.team {
 			font-size: 0.9em;
@@ -220,6 +228,10 @@
 		h5 {
 			font-size: 1.1em;
 		}
+
+		.managerName {
+			font-size: 0.8em;
+		}
 	}
 
 	@media (max-width: 340px) {
@@ -230,6 +242,10 @@
 
 		h5 {
 			font-size: 1em;
+		}
+
+		.managerName {
+			font-size: 0.75em;
 		}
 	}
 
@@ -266,6 +282,11 @@
 					<h3 onclick={() => gotoManager({leagueTeamManagers, rosterID: roster.roster_id})}>
 						<img alt="team avatar" class="teamAvatar" src="{team ? team.avatar : 'https://sleepercdn.com/images/v2/icons/player_default.webp'}" />
 						{team?.name ? team.name : 'No Manager'}
+						{#if renderManagerNames && manager?.name}
+							<div class="managerName">
+								{manager.name}
+							</div>
+						{/if}
 					</h3>
 
 					<div class="record">
