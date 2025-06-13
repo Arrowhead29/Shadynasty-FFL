@@ -1,9 +1,8 @@
 <script>
-	import { gotoManager } from '$lib/utils/helper';
+	import { gotoManager, renderManagerNames } from '$lib/utils/helper';
   	import DataTable, { Head, Body, Row, Cell } from '@smui/data-table';
 	import { Icon } from '@smui/icon-button';
 	import RosterRow from "./RosterRow.svelte"
-	import { renderManagerNames } from '$lib/utils/helperFunctions/universalFunctions';
 	
 	export let roster, leagueTeamManagers, startersAndReserve, players, rosterPositions, division, expanded;
 
@@ -269,7 +268,7 @@
 						{team?.name ? team.name : 'No Manager'}
 					</h3>
 
-					<h4 onclick={() => gotoManager({leagueTeamManagers, rosterID: roster.roster_id})}>
+					<h4 class="manager-name" onclick={() => gotoManager({leagueTeamManagers, rosterID: roster.roster_id})}>
 						{renderManagerNames(leagueTeamManagers, roster.roster_id, leagueTeamManagers.currentSeason)}
 					</h4>
 
