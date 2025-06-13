@@ -200,6 +200,17 @@
 		margin: 12px 0;
 	}
 
+	h4 {
+        display: table;
+        text-align: center;
+        line-height: 1.1em;
+        font-size: 1.2em;
+        margin: 5px auto 10px;
+        cursor: pointer;
+        color: #666;
+        font-style: italic;
+    }
+
 	h5 {
 		font-size: 1.2em;
 		text-align: center;
@@ -269,7 +280,7 @@
 						{team?.name ? team.name : 'No Manager'}
 					</h3>
 
-					<h4 class="manager-name" onclick={() => gotoManager({leagueTeamManagers, rosterID: roster.roster_id})}>
+					<h4 onclick={() => gotoManager({leagueTeamManagers, rosterID: roster.roster_id})}>
 						{renderManagerNames(leagueTeamManagers, roster.roster_id, leagueTeamManagers.currentSeason)}
 					</h4>
 
