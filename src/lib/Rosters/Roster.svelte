@@ -4,7 +4,7 @@
 	import { Icon } from '@smui/icon-button';
 	import RosterRow from "./RosterRow.svelte"
 	
-	import { renderManagerNames } from '$lib/utils/helperFunctions/universalFunctions';
+	import { renderManagerNames } from '$lib/utils/helperFunctions/universalFunctions.js';
 	
 	export let roster, leagueTeamManagers, startersAndReserve, players, rosterPositions, division, expanded, showManagerNames;
 
