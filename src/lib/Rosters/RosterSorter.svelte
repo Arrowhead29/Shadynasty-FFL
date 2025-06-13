@@ -1,11 +1,11 @@
 <script>
     import Button, { Label } from '@smui/button';
 	import Roster from './Roster.svelte';
+	import { renderManagerNames } from '$lib/utils/helperFunctions/universalFunctions';
 	
 	export let rosters, leagueTeamManagers, startersAndReserve, leagueData, players;
 
 	const rosterPositions = leagueData.roster_positions;
-
 
 	const numDivisions = leagueData.settings.divisions || 1;
 
@@ -23,6 +23,22 @@
         const division = !roster.settings.division || roster.settings.division > numDivisions ? 0 : roster.settings.division - 1;
 		divisions[division].rosters.push(roster);
 	}
+
+	// Sort each division's rosters by manager name
+	divisions.forEach(division => {
+		division.rosters.sort((a, b) => {
+			// Get manager names for comparison
+			const managerA = renderManagerNames(leagueTeamManagers, a.roster_id, leagueTeamManagers.currentSeason);
+			const managerB = renderManagerNames(leagueTeamManagers, b.roster_id, leagueTeamManagers.currentSeason);
+			
+			// Handle cases where manager name might be null/undefined
+			const nameA = managerA || 'No Manager';
+			const nameB = managerB || 'No Manager';
+			
+			// Case-insensitive alphabetical sort
+			return nameA.toLowerCase().localeCompare(nameB.toLowerCase());
+		});
+	});
 
 	let expanded = false;
 </script>
