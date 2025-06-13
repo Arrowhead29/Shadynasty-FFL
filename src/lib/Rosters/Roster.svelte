@@ -1,8 +1,9 @@
 <script>
-	import { gotoManager, renderManagerNames } from '$lib/utils/helper';
+	import { gotoManager } from '$lib/utils/helper';
   	import DataTable, { Head, Body, Row, Cell } from '@smui/data-table';
 	import { Icon } from '@smui/icon-button';
 	import RosterRow from "./RosterRow.svelte"
+	import { renderManagerNames } from '$lib/utils/helperFunctions/universalFunctions';
 	
 	export let roster, leagueTeamManagers, startersAndReserve, players, rosterPositions, division, expanded;
 
