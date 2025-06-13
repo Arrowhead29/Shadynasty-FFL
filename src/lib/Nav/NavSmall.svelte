@@ -6,7 +6,7 @@
 	  Title,
 	} from '@smui/drawer';
 	import { Icon } from '@smui/tab';
-  	import List, { Item, Text, Graphic, Separator, Subheader } from '@smui/list';
+	import List, { Item, Text, Graphic, Separator, Subheader } from '@smui/list';
 	import { goto, preloadData } from '$app/navigation';
     import { page } from '$app/state';
 	import { leagueName } from '$lib/utils/helper';
@@ -16,9 +16,13 @@
 
 	let open = $state(false);
 
-	const selectTab = (tab) => {
+	const selectTab = (tab, isExternal = false) => {
 		open = false;
-		goto(tab.dest);
+		if (isExternal) {
+			window.location.href = tab.dest;
+		} else {
+			goto(tab.dest);
+		}
 	}
 </script>
 
@@ -91,8 +95,13 @@
 									<Text class="{active == subTab.dest ? "" : "nav-item"}">{subTab.label}</Text>
 								</Item>
 							{/if}
+						{:else if subTab.label == 'Go to Sleeper'}
+							<Item href="javascript:void(0)" onSMUIAction={() => selectTab(subTab, true)} activated={active == subTab.dest}  ontouchstart={() => {}} onmouseover={() => {}}>
+								<Graphic class="material-icons{active == subTab.dest ? "" : " nav-item"}" aria-hidden="true">{subTab.icon}</Graphic>
+								<Text class="{active == subTab.dest ? "" : "nav-item"}">{subTab.label}</Text>
+							</Item>
 						{:else}
-							<Item href="javascript:void(0)" onSMUIAction={() => selectTab(subTab)} activated={active == subTab.dest}  ontouchstart={() => {if(subTab.label != 'Go to Sleeper') preloadData(subTab.dest)}} onmouseover={() => {if(subTab.label != 'Go to Sleeper') preloadData(subTab.dest)}}>
+							<Item href="javascript:void(0)" onSMUIAction={() => selectTab(subTab)} activated={active == subTab.dest}  ontouchstart={() => preloadData(subTab.dest)} onmouseover={() => preloadData(subTab.dest)}>
 								<Graphic class="material-icons{active == subTab.dest ? "" : " nav-item"}" aria-hidden="true">{subTab.icon}</Graphic>
 								<Text class="{active == subTab.dest ? "" : "nav-item"}">{subTab.label}</Text>
 							</Item>
@@ -102,5 +111,4 @@
 			{/each}
 		</List>
 	</Content>
-  </Drawer>
-	
+</Drawer>
