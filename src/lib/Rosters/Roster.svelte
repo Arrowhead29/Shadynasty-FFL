@@ -8,6 +8,12 @@
 
 	$: team = leagueTeamManagers.teamManagersMap[leagueTeamManagers.currentSeason][roster.roster_id].team;
 	$: manager = leagueTeamManagers.teamManagersMap[leagueTeamManagers.currentSeason][roster.roster_id];
+	
+	// Debug logging - remove after fixing
+	$: console.log('Debug - renderManagerNames:', renderManagerNames);
+	$: console.log('Debug - manager:', manager);
+	$: console.log('Debug - manager.name:', manager?.name);
+	$: console.log('Debug - leagueTeamManagers:', leagueTeamManagers);
 
 	let i = 0;
 
@@ -282,9 +288,10 @@
 					<h3 onclick={() => gotoManager({leagueTeamManagers, rosterID: roster.roster_id})}>
 						<img alt="team avatar" class="teamAvatar" src="{team ? team.avatar : 'https://sleepercdn.com/images/v2/icons/player_default.webp'}" />
 						{team?.name ? team.name : 'No Manager'}
-						{#if renderManagerNames && manager?.name}
+						{#if renderManagerNames}
 							<div class="managerName">
-								{manager.name}
+								<!-- Try multiple possible manager name properties -->
+								{manager?.name || manager?.display_name || manager?.username || 'No Manager Name'}
 							</div>
 						{/if}
 					</h3>
