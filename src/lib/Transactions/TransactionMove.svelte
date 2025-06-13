@@ -285,7 +285,7 @@
                             <div class="tradeSlot budgetHolder">
                                 <span class="budget">faab</span>
                                 <span class="pickInfo">
-                                    {cell.budget.amount}<span class="numEnd">$</span>
+                                    <span class="numEnd">$</span>{cell.budget.amount}
                                 </span>
                                 <i class="indicator material-icons" aria-hidden="true">add_circle</i>
                             </div>
