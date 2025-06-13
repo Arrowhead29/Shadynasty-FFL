@@ -5,7 +5,6 @@
 	export let leagueData, rosterData, leagueTeamManagers, playersInfo;
 
 	let players = playersInfo.players;
-	let showManagerNames = true; // Add this prop to control manager name display
 
 	const refreshPlayers = async () => {
 		const newPlayersInfo = await loadPlayers(null, true);
@@ -15,13 +14,6 @@
 	if(playersInfo.stale) {
 		refreshPlayers();
 	}
-
-	// Debug logging to help troubleshoot
-	$: console.log('Roster Parent Debug:', {
-		leagueTeamManagers,
-		rosterData,
-		showManagerNames
-	});
 </script>
 
 <style>
@@ -32,12 +24,5 @@
 </style>
 
 <div class="rosters">
-	<RosterSorter 
-		rosters={rosterData.rosters} 
-		{players} 
-		{leagueTeamManagers} 
-		startersAndReserve={rosterData.startersAndReserve} 
-		{leagueData}
-		{showManagerNames}
-	/>
+	<RosterSorter rosters={rosterData.rosters} {players} {leagueTeamManagers} startersAndReserve={rosterData.startersAndReserve} {leagueData} />
 </div>

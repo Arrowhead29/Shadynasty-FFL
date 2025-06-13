@@ -3,9 +3,8 @@
   	import DataTable, { Head, Body, Row, Cell } from '@smui/data-table';
 	import { Icon } from '@smui/icon-button';
 	import RosterRow from "./RosterRow.svelte"
-	import { renderManagerNames } from '$lib/utils/helperFunctions/universalFunctions';
 	
-	export let roster, leagueTeamManagers, startersAndReserve, players, rosterPositions, division, expanded, showManagerNames;
+	export let roster, leagueTeamManagers, startersAndReserve, players, rosterPositions, division, expanded;
 
 	$: team = leagueTeamManagers.teamManagersMap[leagueTeamManagers.currentSeason][roster.roster_id].team;
 
@@ -104,17 +103,6 @@
 	}
 
 	$: record = buildRecord(roster);
-
-	// Add debugging for manager names
-	$: managerNames = renderManagerNames(leagueTeamManagers, roster.roster_id, leagueTeamManagers.currentSeason);
-	$: console.log('Manager Names Debug:', {
-		showManagerNames,
-		managerNames,
-		rosterID: roster.roster_id,
-		currentSeason: leagueTeamManagers.currentSeason,
-		teamManagersMap: leagueTeamManagers.teamManagersMap,
-		users: leagueTeamManagers.users
-	});
 
 	let selected = "0px";
 	let status = "minimized";
@@ -216,13 +204,6 @@
 		text-align: center;
 	}
 
-	.managerName {
-		font-size: 0.9em;
-		color: #888;
-		font-weight: 400;
-		margin-top: 3px;
-	}
-
 	@media (max-width: 500px) {
 		.team {
 			font-size: 0.9em;
@@ -239,10 +220,6 @@
 		h5 {
 			font-size: 1.1em;
 		}
-
-		.managerName {
-			font-size: 0.8em;
-		}
 	}
 
 	@media (max-width: 340px) {
@@ -253,10 +230,6 @@
 
 		h5 {
 			font-size: 1em;
-		}
-
-		.managerName {
-			font-size: 0.75em;
 		}
 	}
 
@@ -293,11 +266,6 @@
 					<h3 onclick={() => gotoManager({leagueTeamManagers, rosterID: roster.roster_id})}>
 						<img alt="team avatar" class="teamAvatar" src="{team ? team.avatar : 'https://sleepercdn.com/images/v2/icons/player_default.webp'}" />
 						{team?.name ? team.name : 'No Manager'}
-						{#if showManagerNames}
-							<div class="managerName">
-								{managerNames || 'No managers found'}
-							</div>
-						{/if}
 					</h3>
 
 					<div class="record">
